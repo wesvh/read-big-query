@@ -1,0 +1,10 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "paths": {
+      "read-big-query": ["../src/index"],
+      "read-big-query/*": ["../src/*"]
+    }
+  }
+}
