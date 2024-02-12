@@ -82,16 +82,16 @@ class ReadBigQueryModule : Module() {
     }
 
     private fun readDictionaryFun(dataSerialized : String, promise: Promise) {
-            try {
-                Log.d("ReadBigQueryModule", "Iniciando la conversión del diccionario")
-                
+            try {                
                 val gson = Gson()
                 val type = object : TypeToken<List<List<Any>>>() {}.type
                 val data: List<List<Any>> = gson.fromJson(dataSerialized, type)
+                if (data.isEmpty()) {
+                    promise.resolve("[]")
+                    return
+                }
                 val dictionary = data[0] as List<String>
                 val values = data.subList(1, data.size)
-
-                Log.d("ReadBigQueryModule", "Diccionario: $dictionary")
 
                 // ahora la idea es hacer un JSON con el diccionario y los valores, donde el diccionario sea el nombre de las llaves y los valores sean los valores de las llaves
 
